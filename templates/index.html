@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Image Gallery and Upload</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='upload.js') }}"></script>
+    <script src="{{ url_for('static', filename='gallery.js') }}"></script>
+</head>
+<body>
+    <h1>Autoscope Gallery</h1>
+   <!-- <form id="upload-form" onsubmit="event.preventDefault(); uploadFiles();">
+        <input type="file" id="file-input" name="files" multiple>
+        <input type="submit" value="Upload">
+    </form>-->
+    <div id="progress-container"></div>
+    <hr>
+    <div class="overlay">
+        <img src="" id="top" hidden>
+        <span id="close" hidden onclick="do_close()"><b><u>CLOSE(X)</u></b></span>
+    </div>
+    <div class="cx" style="background-color:#fff;">
+        <form id="gallery-form" onsubmit="event.preventDefault(); uploadSelectedFiles();">
+            <div id="gallery-container">
+                {% for path in paths %}
+                    <div class="image-item">
+                        <input type="checkbox" name="files" value="{{ path }}">
+                        <img src='cdn/{{ path }}' height=200 width=200 onclick="clicked_img(this)">
+                    </div>
+                {% endfor %}
+            </div>
+            <input type="submit" value="Upload Selected Images">
+        </form>
+    </div>
+    <div id="upload-results"></div>
+</body>
+</html>
+
